@@ -1,7 +1,12 @@
-FROM ibmjava:8-sfj
-MAINTAINER IBM Java engineering at IBM Cloud
+FROM node
 
-COPY target/spring-1.0-SNAPSHOT.jar /app.jar
+WORKDIR /usr/src/app
 
-ENV JAVA_OPTS=""
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+COPY . //usr/src/app
+
+RUN npm install
+ 
+
+EXPOSE 8080
+
+CMD [ "npm", "start" ]
